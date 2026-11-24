@@ -1,0 +1,137 @@
+{
+  "info": {
+    "name": "Compro API",
+    "description": "Dokumentasi endpoint GET Compro API. Ubah variable base_url sesuai alamat server API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8001",
+      "type": "string",
+      "description": "Base URL server Laravel. Contoh production: https://api.example.com"
+    },
+    {
+      "key": "user_id",
+      "value": "1",
+      "type": "string",
+      "description": "ID user untuk endpoint detail"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "description": "Memeriksa apakah API aktif. Endpoint ini tidak membutuhkan koneksi ke tabel users.",
+        "url": {
+          "raw": "{{base_url}}/api/health",
+          "host": ["{{base_url}}"],
+          "path": ["api", "health"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Users",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "description": "Mengambil daftar user dengan pagination. Query tersedia: search, per_page (1-100), sort (id/name/email/created_at), dan direction (asc/desc).",
+        "url": {
+          "raw": "{{base_url}}/api/users?per_page=20&sort=id&direction=desc",
+          "host": ["{{base_url}}"],
+          "path": ["api", "users"],
+          "query": [
+            {
+              "key": "search",
+              "value": "",
+              "description": "Opsional. Cari berdasarkan nama atau email."
+            },
+            {
+              "key": "per_page",
+              "value": "20",
+              "description": "Opsional. Jumlah data per halaman, maksimal 100."
+            },
+            {
+              "key": "sort",
+              "value": "id",
+              "description": "Opsional. Pilihan: id, name, email, created_at."
+            },
+            {
+              "key": "direction",
+              "value": "desc",
+              "description": "Opsional. Pilihan: asc atau desc."
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get User Detail",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "description": "Mengambil detail satu user berdasarkan ID.",
+        "url": {
+          "raw": "{{base_url}}/api/users/{{user_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "users", "{{user_id}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Available Tables",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "description": "Mengambil daftar tabel bisnis yang tersedia dan aman dibaca melalui API.",
+        "url": {
+          "raw": "{{base_url}}/api/tables",
+          "host": ["{{base_url}}"],
+          "path": ["api", "tables"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Table Data - Products",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "description": "Contoh mengambil data dari tabel products. Ganti products dengan nama tabel dari request Get Available Tables. Query: search, per_page, sort, direction.",
+        "url": {
+          "raw": "{{base_url}}/api/data/products?per_page=20&direction=desc",
+          "host": ["{{base_url}}"],
+          "path": ["api", "data", "products"],
+          "query": [
+            {
+              "key": "search",
+              "value": "",
+              "description": "Opsional. Mencari pada kolom teks tabel."
+            },
+            {
+              "key": "per_page",
+              "value": "20",
+              "description": "Opsional. Jumlah data per halaman, maksimal 100."
+            },
+            {
+              "key": "sort",
+              "value": "",
+              "description": "Opsional. Nama kolom yang akan diurutkan."
+            },
+            {
+              "key": "direction",
+              "value": "desc",
+              "description": "Opsional. asc atau desc."
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
