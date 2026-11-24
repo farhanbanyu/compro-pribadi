@@ -1,0 +1,59 @@
+<x-backend.layouts>
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h2>Edit Trade Finance Support</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ url('dashboard') }}"><i class="fa fa-dashboard"></i></a></li>
+                        <li class="breadcrumb-item">Dashboard</li>
+                        <li class="breadcrumb-item">Trade Finance Support</li>
+                        <li class="breadcrumb-item active">Edit</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>Edit Trade Finance Support</h2>
+                </div>
+                <div class="body">
+                    <form id="basic-form" action="{{ url('trade-finance-support/update') }}" class="_form" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $item->id }}">
+
+                        <div class="form-group">
+                            <label>Nama</label>
+                            <input type="text" name="name" class="form-control" required value="{{ $item->name }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Deskripsi</label>
+                            <textarea name="description" class="form-control summernote">{{ $item->description }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Foto</label>
+                            <input type="file" name="photo" class="form-control">
+                            @if($item->photo)
+                                <img style="width: 150px; margin-top: 10px;" src="{{ asset($item->photo) }}" />
+                            @endif
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <x-slot name="js">
+        <link rel="stylesheet" href="{{ asset('backend/assets/vendor/summernote/dist/summernote.css') }}" />
+        <script src="{{ asset('backend/assets/vendor/summernote/dist/summernote.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('backend/system/crud/post.js') }}"></script>
+    </x-slot>
+</x-backend.layouts>
